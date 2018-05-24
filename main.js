@@ -85,3 +85,42 @@ function put_quotations_around_text() {
 	textarea_out = document.getElementById('output');
 	textarea_out.value = new_textarea_output;
 }
+
+
+function python_def_extraction() {
+	/*Insert your python code and this program will print out all the rows that contain "def".*/
+	textarea_input = document.getElementById("input").value;
+	var regex = new RegExp('\n', 'g');
+	textarea_output = textarea_input.split(regex);
+	var array_length = textarea_output.length;
+	var new_textarea_output = [];
+	for(i=0; i < array_length; i++){
+		curr_element = ""
+		if (textarea_output[i].includes("def")){
+			curr_element += textarea_output[i];
+			curr_element += "\n";
+			new_textarea_output.push(curr_element);
+		}
+	}
+	textarea_out = document.getElementById('output');
+	textarea_out.value = new_textarea_output.join("")
+}
+
+
+function common_value_printer() {
+	/*Checks two comma separated list for any common terms.Then prints the output to the text area.*/
+	set1 = document.getElementById("set1").value;
+	set2 = document.getElementById("set2").value;
+	set_1 = set1.split(",");
+	set_2 = set2.split(",");
+	common_set = [];
+	for(i=0; i<set_1.length; i++){
+		for(j=0; j<set_2.length; j++){
+			if(set_1[i] == set_2[j]){
+				common_set.push(set_1[i]);
+			}
+		}
+	}
+	textarea_out = document.getElementById('output');
+	textarea_out.value = common_set;
+}
