@@ -63,3 +63,25 @@ function convert_list_to_rows() {
 }
 
 
+function put_quotations_around_text() {
+	/*Given any amount of comma separated or plain rows, you can put quotations around them.*/
+	textarea_input = document.getElementById("input").value;
+	if(textarea_input.includes(",")){
+		var regex = new RegExp(',\n', 'g');		
+	} else {
+		var regex = new RegExp('\n', 'g');
+	}
+
+	textarea_output = textarea_input.split(regex);
+	var array_length = textarea_output.length;
+	var new_textarea_output = []
+	for(i=0; i < array_length; i++){
+		curr_element = "\n\"";
+		curr_element += textarea_output[i];
+		curr_element += "\"";
+		new_textarea_output.push(curr_element)
+	}
+	new_textarea_output[0] = new_textarea_output[0].replace("\n","")
+	textarea_out = document.getElementById('output');
+	textarea_out.value = new_textarea_output;
+}
