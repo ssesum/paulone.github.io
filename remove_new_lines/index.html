@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Print Multiplied Text
+		</title>
+		<link rel="stylesheet" href="../styles.css">
+		<script type='text/javascript' src='../main.js'></script>
+	</head>
+	<body>
+		<h1><a href="https://github.com/paulone">My Github</a></h1>
+		<hr>
+		<h3>Description</h3>
+		<p>
+			This program will remove new lines for you from given input.</br>
+			Example:</br>
+				yes,</br>
+				no,</br>
+				maybe,</br>
+				so</br></br>
+			Turns into yes,no,maybe,so.
+		</p>
+		<form name="myForm">
+			Split results by nothing, Tab, or Comma.
+			<input type="radio" name="choice" checked="checked" value="none">
+			<label>None</label>			
+			
+			<input type="radio" name="choice" value="tab">
+			<label>Tab</label>
+
+			<input type="radio" name="choice" value="comma">
+			<label>Comma</label>
+		</form>
+		Input:
+		<div>
+			<textarea id="input" col="25" rows="10"></textarea>
+		</div>
+		</br>
+		<button onclick="remove_new_lines()">Remove new lines!</button>
+		</br></br>
+		Output:</br> 
+		<div id="output_box">
+			<textarea id="output" col="100" rows="10"></textarea>
+		</div>
+	</body>
+</html>
