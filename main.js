@@ -1,7 +1,11 @@
+/*
+This is a list of personal functions I've created that have helped me in my work.
+*/
 function log(message){
 	/*Helper function to log to the console messages for debugging.*/
 	console.log(message);
 }
+
 
 function print_multiplied_text() {
 	/*This function will multiply the text you input into the input box.*/
@@ -29,6 +33,7 @@ function print_multiplied_text() {
 	textbox.value = out;
 }
 
+
 function remove_new_lines() {
 	/*This function will remove all new lines from the given input box.*/
 	var regex = new RegExp('\n', 'g');
@@ -46,4 +51,15 @@ function remove_new_lines() {
 	textarea_out = document.getElementById('output');
 	textarea_out.value = textarea_output;
 }
+
+
+function convert_list_to_rows() {
+	/*Input a comma separated list and convert that to new line separated rows.*/
+	textarea_input = document.getElementById("input").value;
+	var regex = new RegExp(',', 'g');
+	textarea_output = textarea_input.replace(regex, '\n')
+	textarea_out = document.getElementById('output');
+	textarea_out.value = textarea_output;	
+}
+
 
