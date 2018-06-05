@@ -22,30 +22,14 @@ Bayes Theorem:
     #%%latex
     #$$P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}$$
 
-TODO:
-    Intended plan of the data
-    Word document - diagram depicting the architecture and intended use
 
-List of functions:
-    def program_end():
-    def cmd_python_dir():
-    def open_folder(directory):
-    def split_big_file_into_chunks(directory, file, chunk_size):
+Functions:
     def print_random_new_lines(counter=1):
-    def remove_char_from_file(directory, file, character):
-    def delete_folder(directory):
-    def rename_files(directory, prefix):
     def clear_screen():
-    def convert_csv_to_txt_file(directory):
-    def convert_txt_to_csv_file(directory):
-    def convert_csv_to_tsv_file(directory):
-    def change_case_of_file_names(directory):
     def print_calendar():
-    def log_mouse_position(sleep_time=0.5, intervals=30):
     def random_hex_color():
     def read_csv(directory, data_set_name):
     def read_table(directory, data_set):
-    def drop_columns(dataframe, columns, axis):
     def df_cols(dataframe):
     def df_size(dataframe):
     def df_shape(dataframe):
@@ -87,22 +71,16 @@ List of functions:
     def value_count_list(dataframe, column):
     def merg_all_ltch_quarter_data():
     def cwd():
-    def column_extraction(filename, start_cut_off, end_cut_off, row_start, row_end):
     def convert_dataframe_to_csv(dataframe, filename):
     def remove_empty_columns(dataframe):
-    def naming_convention_conversion(loc):
-    def python_to_excel_conversion(loc):
     def target_rest_split(dataframe, target_col):
     def numeric_dtype_selection(dataframe):
     def column_to_list(dataframe):
     def rfe_data_pipeline_numeric(dataframe, target_col):
-    def read_data_excel(directory, data_set_name, sheetname):
-    def convert_wsr_to_csv():
-    def append_to_wsr():
-    def subset_check_lists():
     def trim_list_whitespace(list_to_trim):
     def view_value_counts(dataframe):
-
+    def get_percentage_missing(dataframe, column):
+    def pdf_shape(dataframe):
 """
 #%matplotlib inline
 #%load_ext memory_profiler
@@ -140,51 +118,8 @@ SANDBOX = DESKTOP + "Main/sandbox/"
 RUNMODE = 1
 
 
-def program_end():
-    """Signals that the program has succesfully ended."""
-    for index in range(rd.randint(1, 5)):
-        print(str(index) + " COMPLETE " + str(int(rd.randint(100, 200))))
-    return
-
-
-def cmd_python_dir():
-    """Open command prompt on the main python folder."""
-    os.chdir("C:\\Users\\plee\\AppData\\Local\\Programs\\Python\\Python36-32\\Scripts")
-    os.system("start cmd")
-    pyperclip.\
-    copy("pylint C:/Users/plee/Desktop/Main/construction-personal/dataframe_methods.py")
-    return
-
-
-def open_folder(directory):
-    """
-    Open folder at a specified location.
-    Python Script Folder: C:/Users/plee/AppData/Local/Programs/Python/Python36-32/Scripts
-    """
-    os.startfile(directory)
-    return
-
-
-def split_big_file_into_chunks(directory, file, chunk_size):
-    """Split a big file into smaller chunks"""
-    os.chdir(directory)
-    with open(file) as f_in:
-        headers = f_in.readline()
-        f_out = open("SNF_MDS_0.txt", "w")
-        f_out.write(headers)
-        for index, line in enumerate(f_in):
-            f_out.write(line)
-            if(index+1) % chunk_size == 0:
-                print(index)
-                f_out.close()
-                f_out = open("SNF_MDS_" + str(int(math.ceil(index/chunk_size))) + ".txt",
-                             "w")
-                f_out.write(headers)
-        f_out.close()
-
-
 def print_random_new_lines(counter=1):
-    """Print random new lines, this is for cool people only."""
+    """Print random new lines."""
     symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+"]
     length_of_symbols_list = len(symbols)-1
     counter = counter
@@ -196,104 +131,12 @@ def print_random_new_lines(counter=1):
             ticker += 1
         print(random_symbol_list)
         counter -= 1
-
-    return
-
-
-def remove_char_from_file(directory, file, character):
-    """Remove a character from a text file."""
-    os.chdir(directory)
-    with open(file + "_NEW", 'w') as file_out:
-        with open(file, 'r') as file_in:
-            for line in file_in:
-                file_out.write(line.replace(character, ""))
-            file_in.close()
-        file_out.close()
-    return
-
-
-def delete_folder(directory):
-    """Delete all contents of the given directory."""
-    shutil.rmtree(directory)
-    os.rmdir(directory)
-    os.mkdir(directory)
-    return
-
-
-def rename_files(directory, prefix):
-    """Rename files in a certain directory with a given prefix."""
-    for file in os.listdir(directory):
-        os.rename(file, prefix + "_" + file)
     return
 
 
 def clear_screen():
     """Clears the screen with a specified count"""
     print("\n" * 200)
-    return
-
-
-def convert_csv_to_txt_file(directory):
-    """Convert a csv file to a text file."""
-    in_delimiter = ","
-    out_delimiter = ","
-    lineterminator = "\n"
-
-    for file in os.listdir(directory):
-        if ".csv" in file:
-            file_name = file.replace(".csv", ".txt")
-            in_text = csv.reader(open(file, "r"),
-                                 delimiter=in_delimiter)
-            out_text = csv.writer(open(file_name, "w"),
-                                  delimiter=out_delimiter,
-                                  lineterminator=lineterminator)
-            out_text.writerows(in_text)
-    return
-
-
-def convert_txt_to_csv_file(directory):
-    """Convert a text file to a csv file."""
-    in_delimiter = ","
-    lineterminator = "\n"
-    out_delimiter = ","
-
-    for file in os.listdir(directory):
-        if ".txt" in file:
-            file_name = file.replace(".txt", ".csv")
-            in_text = csv.reader(open(file, "r"), delimiter=in_delimiter)
-            out_text = csv.writer(open(file_name, "w"),
-                                  delimiter=out_delimiter,
-                                  lineterminator=lineterminator)
-            out_text.writerows(in_text)
-    return
-
-
-def convert_csv_to_tsv_file(directory):
-    """Convert a csv file to a tsv file."""
-    for file in os.listdir(directory):
-        if ".csv" in file:
-            file_name = file.replace(".csv", ".tsv")
-            with open(file, 'r') as in_f, open(file_name, 'w') as out_f:
-                reader = csv.reader(in_f)
-                writer = csv.writer(out_f, delimiter='\t')
-                for line in reader:
-                    writer.writerow(line)
-                out_f.close()
-                in_f.close()
-    return
-
-
-def change_case_of_file_names(directory):
-    """Change the default case of the file names to upper/lower case."""
-    case = input("Type L for lower case, and U for upper case.")
-    if case == 'L':
-        for file in os.listdir(directory):
-            os.rename(file, file.lower())
-    elif case == 'U':
-        for file in os.listdir(directory):
-            os.rename(file, file.upper())
-    else:
-        print("Invalid character.")
     return
 
 
@@ -304,20 +147,6 @@ def print_calendar():
     cal.pryear(2018)
     print("Current date and time using strftime:")
     print(now.strftime("%m-%d-%Y %H:%M"))
-    return
-
-
-
-def log_mouse_position(sleep_time=0.5, intervals=30):
-    """
-        Log the mouse position for a certain amount of time.
-    """
-    for interval in range(intervals):
-        time.sleep(sleep_time)
-        x_pos, y_pos = win32api.GetCursorPos()
-        print(interval)
-        print("X coord:".ljust(10) + str(x_pos).ljust(5))
-        print("Y coord:".ljust(10) + str(y_pos).ljust(5) + "\n")
     return
 
 
@@ -337,11 +166,6 @@ def read_csv(directory, data_set_name):
 def read_table(directory, data_set):
     """Read data from any format into a pandas dataframe."""
     return pd.read_table(directory + data_set, delimiter=',', na_values=['NA'])
-
-
-def drop_columns(dataframe, columns, axis):
-    """Drop set of column's from the given dataframe."""
-    return dataframe.drop(columns, axis=axis)
 
 
 def df_cols(dataframe):
@@ -501,7 +325,7 @@ def df_metrics(dataframe, mode):
     unique_ljust = 10
     count_ljust = 9
     type_ljust = 8
-
+    pm_ljust = 5
 
     dataframe_rows, dataframe_cols = df_shape(dataframe)
     total_null_values = df_null_counts(dataframe)
@@ -522,14 +346,16 @@ def df_metrics(dataframe, mode):
           "Column Name".ljust(col_ljust),
           "Unique".ljust(unique_ljust),
           "Count".ljust(count_ljust),
-          "Type".ljust(type_ljust))
+          "Type".ljust(type_ljust),
+         "Percentage Missing".ljust(pm_ljust))
     if mode == 0:
         for index, col in enumerate(column_names):
             print(str(index+1).ljust(index_ljust),
                   col.ljust(col_ljust),
                   unique_value_counts(dataframe, col).ljust(unique_ljust),
                   str(column_count(dataframe, col)).ljust(count_ljust),
-                  column_data_type(dataframe, col))
+                  str(column_data_type(dataframe, col)).ljust(type_ljust),
+                 get_percentage_missing(dataframe, col))
     elif mode == 1:
         for index, col in enumerate(column_names):
             if column_count(dataframe, col) == 0:
@@ -812,23 +638,6 @@ def cwd():
     return
 
 
-def column_extraction(filename, start_cut_off, end_cut_off, row_start, row_end):
-    """Grabs data columns to insert into the dataframe."""
-    directory = "C:/Users/plee/Desktop/Main/data/SNF_DATA/FTS_FILES/"
-    with open(directory + "save.txt", "w") as file_out:
-        with open(directory + filename, "r") as file_in:
-            content = file_in.readlines()
-            file_out.write("([")
-            for index, row in enumerate(content):
-                if index < start_cut_off or index > end_cut_off:
-                    continue
-                file_out.write("'" + row[row_start:row_end].strip() + "',")
-            file_out.write("])")
-        file_in.close()
-    file_out.close()
-    return
-
-
 def convert_dataframe_to_csv(dataframe, filename):
     """Convert the given dataframe to csv."""
     dataframe.to_csv(filename, index=False)
@@ -841,55 +650,6 @@ def remove_empty_columns(dataframe):
     for col in columns:
         if column_count(dataframe, col) == 0:
             dataframe.drop(col, axis=1, inplace=True)
-    return
-
-
-def naming_convention_conversion(loc):
-    """
-    This function was created to manipulate the strings for
-    the PAC team data validation tool.
-    """
-    directory = loc
-    with open(directory + "save.txt", "w") as file_out:
-        with open(directory + "read.txt", "r") as file_in:
-            content = file_in.readlines()
-            for row in content:
-                replacement = "final_print(df, "
-                construct = row.split("=")
-                construct[0] = construct[0].strip()
-                construct[1] = construct[1].strip()
-                final_c0 = "\"" + construct[0] + "\""
-                replacement += final_c0
-                replacement += ", "
-                replacement += construct[1]
-                replacement += ")\n"
-                file_out.write(replacement)
-        file_in.close()
-    file_out.close()
-    return
-
-
-def python_to_excel_conversion(loc):
-    """
-    This function was built for strip out the python components
-    and change it into an excel format.
-    """
-    directory = loc
-    with open(directory + "saveere.txt", "w") as file_out:
-        with open(directory + "ree.txt", "r") as file_in:
-            content = file_in.readlines()
-            for row in content:
-                replacement = row.replace("final_print(df, ", "")\
-                              .replace("\"", "")\
-                              .replace(")", "")\
-                              .strip()
-
-                split = replacement.split(",", 1)
-                replacement = ""
-                replacement = split[0] + "\t" + split[1] + "\n"
-                file_out.write(replacement)
-        file_in.close()
-    file_out.close()
     return
 
 
@@ -936,42 +696,6 @@ def rfe_data_pipeline_numeric(dataframe, target_col):
     return x_test, y_test
 
 
-def read_data_excel(directory, data_set_name, sheetname):
-    """Reads data into a dataframe using pandas."""
-    return pd.read_excel(directory + data_set_name, sheetname=sheetname)
-
-
-def convert_wsr_to_csv():
-    """
-    Convert my WSR to CSV for easier upload to Kibana.
-    directory: C:/Users/plee/Desktop/Main
-    """
-    wsr_paul = read_data_excel("C:/Users/plee/Desktop/Main", "PAUL-WSR.xlsx", "Paul")
-    wsr_paul = drop_columns(wsr_paul, ['TASK DESCRIPTION'], 1)
-    wsr_paul.to_csv("PAUL-WSR.csv", index=False, header=None)
-    return
-
-
-def append_to_wsr():
-    """Append the word I did to my WSR."""
-    file = openpyxl.load_workbook('PAUL-WSR.xlsx')
-    sheet = file.get_sheet_by_name('Paul')
-    task_name = input("What is the name of the task?")
-    desc = input("What is the description of the task?")
-    owner = input("Who assigned you this task?")
-    hours = input("How many hours did you spend on this task?")
-    project = input("What project is this for?")
-    num = str(sheet.max_row + 1)
-    sheet['A' + num] = task_name
-    sheet['B' + num] = desc
-    sheet['C' + num] = owner.upper()
-    sheet['D' + num] = hours
-    sheet['E' + num] = datetime.datetime.now().strftime('%m/%d/%Y')
-    sheet['F' + num] = project.upper()
-    file.save('PAUL-WSR.xlsx')
-    return
-
-
 def trim_list_whitespace(list_to_trim):
     """Removes all whitespace from the elements of a list."""
     return_list = []
@@ -989,7 +713,26 @@ def view_value_counts(dataframe):
     for col in df_cols:
         print(col, value_count_list(dataframe, col))
     return
-    
+
+
+def get_percentage_missing(dataframe, column):
+    """ 
+    Caluculate the percentage of null values in a dataframe column.
+    """
+    num = dataframe[column].isnull().sum()
+    den = len(dataframe)
+    return str(round(num/den, 4) * 100) + "%"
+
+
+def pdf_shape(dataframe):
+    """
+    Pretty print the shape of a dataframe.
+    """
+    rows, cols = df_shape(df_age_less_than_25)
+    print("Rows: " + str(rows))
+    print("Cols: " + str(cols))
+    return
+
 
 if __name__ == "__main__":
     if "ubuntu" in str(os.getcwd()):
@@ -997,4 +740,4 @@ if __name__ == "__main__":
     else:
         import win32api
         put_quotations_around_columns()
-    program_end()
+    print_random_new_lines(5)
