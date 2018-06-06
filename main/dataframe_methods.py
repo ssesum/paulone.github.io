@@ -21,67 +21,8 @@ Magic:
 Bayes Theorem:
     #%%latex
     #$$P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}$$
-
-
-Functions:
-    def print_random_new_lines(counter=1):
-    def clear_screen():
-    def print_calendar():
-    def random_hex_color():
-    def read_csv(directory, data_set_name):
-    def read_table(directory, data_set):
-    def df_cols(dataframe):
-    def df_size(dataframe):
-    def df_shape(dataframe):
-    def df_null_counts(dataframe):
-    def print_bar(count=1):
-    def unique_value_counts(dataframe, column):
-    def column_count(dataframe, column):
-    def column_data_type(dataframe, column):
-    def lowercase_all_columns(dataframe):
-    def uppercase_all_columns(dataframe):
-    def change_column_character(dataframe, change_from, change_to):
-    def value_counts(dataframe, column):
-    def print_stats(subject, left_justified_number, count):
-    def df_corr(dataframe, method):
-    def convert_column_to_categorical(dataframe, column):
-    def dtype_columns(dataframe, dtype):
-    def convert_column_value_to_null(dataframe, column, value):
-    def column_data_type_conversion(dataframe, column, type_change):
-    def pair_plot(dataframe, hue):
-    def pr_err(text):
-    def split_data(dataframe, target_col, learning_cols):
-    def split_data_test_train(dataframe, target_col, learning_cols, split_size):
-    def cat_to_num_conversion(dataframe, category):
-    def df_metrics(dataframe, mode):
-    def convert_column_to_numerical(dataframe, column):
-    def convert_new_column_to_numerical(dataframe, column):
-    def print_metrics(y_test, pred):
-    def pipeline_linear_regression(dataframe, target_col, learning_cols, split, rep):
-    def pipeline_random_forest(dataframe, target_col, learning_cols, split_size):
-    def join_3_data_sets(directory, set_1, set_2, set_3):
-    def combine_3_similar_datasets(directory, set_1, set_2, set_3, save_name):
-    def split_data_by_month(dataframe, month_1, month_2, month_3, save_name):
-    def quarter_difference_calculator(directory, set_1, set_2, set_3):
-    def group_and_sort_by(dataframe, groupby, sortby):
-    def death_summation(directory, data):
-    def value_counts_to_dataframe(dataframe, column):
-    def seaborn_heatmap(dataframe, column):
-    def subset_check(set_in, set_check):
-    def value_count_list(dataframe, column):
-    def merg_all_ltch_quarter_data():
-    def cwd():
-    def convert_dataframe_to_csv(dataframe, filename):
-    def remove_empty_columns(dataframe):
-    def target_rest_split(dataframe, target_col):
-    def numeric_dtype_selection(dataframe):
-    def column_to_list(dataframe):
-    def rfe_data_pipeline_numeric(dataframe, target_col):
-    def trim_list_whitespace(list_to_trim):
-    def view_value_counts(dataframe):
-    def get_percentage_missing(dataframe, column):
-    def pdf_shape(dataframe):
 """
+
 #%matplotlib inline
 #%load_ext memory_profiler
 import calendar
@@ -102,20 +43,7 @@ import pyperclip
 from sklearn import linear_model, metrics
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LinearRegression, LogisticRegression
 sb.set()
-
-
-#Global Variables
-if("plee" in os.getcwd()):
-    DESKTOP = "C:/Users/plee/Desktop/"
-else:
-    DESKTOP = "C:/Users/Paul/Desktop/"
-
-DATADIR = DESKTOP + "data/"
-SANDBOX = DESKTOP + "Main/sandbox/"
-RUNMODE = 1
 
 
 def print_random_new_lines(counter=1):
@@ -173,39 +101,9 @@ def df_cols(dataframe):
     return dataframe.columns
 
 
-def df_size(dataframe):
-    """Return the size of the dataframe, which is just rows * columns."""
-    return dataframe.size
-
-
-def df_shape(dataframe):
-    """Return the shape of the dataframe(rows, columns)."""
-    return dataframe.shape
-
-
-def df_null_counts(dataframe):
-    """This function returns the number of null values in the dataframe."""
-    return dataframe.isnull().sum().sum()
-
-
-def print_bar(count=1):
-    """Print a horizontal bar of siize count"""
-    print("-" * count)
-
-
-def unique_value_counts(dataframe, column):
-    """Return the number of unique value counts of a column."""
-    return str(len(list((dataframe[column].value_counts()))))
-
-
-def column_count(dataframe, column):
-    """Return the length of the specified dataframe column."""
-    return dataframe[column].count()
-
-
-def column_data_type(dataframe, column):
-    """Return the datatype of the column specified."""
-    return dataframe.dtypes[column]
+def vunique_value_counts(dataframe, column):
+    """Return the number of unique value counts."""
+    return len(list((dataframe[column].value_counts())))
 
 
 def lowercase_all_columns(dataframe):
@@ -232,10 +130,9 @@ def value_counts(dataframe, column):
     return
 
 
-def print_stats(subject, left_justified_number, count):
-    """Print formatted statistics with a left justification."""
-    print(subject.ljust(left_justified_number), count)
-    return
+def vvalue_counts(dataframe, column):
+    """Return the value counts of a given column."""
+    return dataframe[column].value_counts()
 
 
 def df_corr(dataframe, method):
@@ -283,26 +180,6 @@ def pr_err(text):
     return
 
 
-def split_data(dataframe, target_col, learning_cols):
-    """Parse the data into the target column and the learning columns."""
-    combined_columns = learning_cols + target_col
-    parsed_dataframe = dataframe[combined_columns]
-    parsed_dataframe = parsed_dataframe.dropna(axis=0)
-    x_all = parsed_dataframe[learning_cols]
-    y_all = parsed_dataframe[target_col]
-    return x_all, y_all
-
-
-def split_data_test_train(dataframe, target_col, learning_cols, split_size):
-    """
-    This function uses the sklearn train_test_split function to
-    split the given parsed data into 4 different parts. The 4 parts are
-    x_train, x_test, y_train, and y_test.
-    """
-    x_all, y_all = split_data(dataframe, target_col, learning_cols)
-    return train_test_split(x_all, y_all, test_size=split_size)
-
-
 def cat_to_num_conversion(dataframe, category):
     """
     This function will find all columns with a certain category,
@@ -313,59 +190,14 @@ def cat_to_num_conversion(dataframe, category):
     return
 
 
-def df_metrics(dataframe, mode):
+def split_data_test_train(dataframe, target_col, learning_cols, split_size):
     """
-    This function will print many beginner analytics for the first
-    analytics of a data set. This function is also expected to grow a decent
-    size because I'll keep learning more and more.
+    This function uses the sklearn train_test_split function to
+    split the given parsed data into 4 different parts. The 4 parts are
+    x_train, x_test, y_train, and y_test.
     """
-    ljust = 23
-    index_ljust = 7
-    col_ljust = 35
-    unique_ljust = 10
-    count_ljust = 9
-    type_ljust = 8
-    pm_ljust = 5
-
-    dataframe_rows, dataframe_cols = df_shape(dataframe)
-    total_null_values = df_null_counts(dataframe)
-    print_bar(90)
-    print_stats("Number of elements:", ljust, df_size(dataframe))
-    print_stats("Number of rows:", ljust, dataframe_rows)
-    print_stats("Number of columns:", ljust, dataframe_cols)
-    print_stats("Number of NULL values:", ljust, total_null_values)
-    print_bar(90)
-
-
-    dataframe.info()
-    print_bar(90)
-
-
-    column_names = dataframe.columns
-    print("Index".ljust(index_ljust),
-          "Column Name".ljust(col_ljust),
-          "Unique".ljust(unique_ljust),
-          "Count".ljust(count_ljust),
-          "Type".ljust(type_ljust),
-         "Percentage Missing".ljust(pm_ljust))
-    if mode == 0:
-        for index, col in enumerate(column_names):
-            print(str(index+1).ljust(index_ljust),
-                  col.ljust(col_ljust),
-                  unique_value_counts(dataframe, col).ljust(unique_ljust),
-                  str(column_count(dataframe, col)).ljust(count_ljust),
-                  str(column_data_type(dataframe, col)).ljust(type_ljust),
-                 get_percentage_missing(dataframe, col))
-    elif mode == 1:
-        for index, col in enumerate(column_names):
-            if column_count(dataframe, col) == 0:
-                print(str(index+1).ljust(index_ljust),
-                      col.ljust(col_ljust),
-                      unique_value_counts(dataframe, col).ljust(unique_ljust),
-                      str(column_count(dataframe, col)).ljust(count_ljust),
-                      column_data_type(dataframe, col))
-    print_bar(90)
-    return
+    x_all, y_all = split_data(dataframe, target_col, learning_cols)
+    return train_test_split(x_all, y_all, test_size=split_size)
 
 
 def convert_column_to_numerical(dataframe, column):
@@ -653,49 +485,6 @@ def remove_empty_columns(dataframe):
     return
 
 
-def target_rest_split(dataframe, target_col):
-    """
-    This function splits the data into a single target column,
-    and the rest are predictors
-    """
-    data_vars = dataframe.columns.values.tolist()
-    target = [target_col]
-    predicted = [col for col in data_vars if col not in target]
-    return dataframe[target], dataframe[predicted]
-
-
-def numeric_dtype_selection(dataframe):
-    """This function grabs all the columns from a dataframe that are numeric"""
-    numeric_dtypes = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-    return dataframe.select_dtypes(include=numeric_dtypes)
-
-
-def column_to_list(dataframe):
-    """Convert dataframe columns to a list."""
-    return dataframe.columns.values.tolist()
-
-
-def rfe_data_pipeline_numeric(dataframe, target_col):
-    """Complete numeric data to rfe feature selection pipeline."""
-    df_numeric = numeric_dtype_selection(dataframe)
-    target, predictors = target_rest_split(df_numeric, target_col)
-    x_train, x_test, y_train, y_test = split_data_test_train(df_numeric,
-                                                             column_to_list(target),
-                                                             column_to_list(predictors),
-                                                             0.2)
-    linreg = LinearRegression()
-    rfe = RFE(linreg)
-    rfe = rfe.fit(x_train, y_train)
-    print(rfe.support_)
-    print(rfe.ranking_)
-    logreg = LogisticRegression()
-    rfe = RFE(logreg)
-    rfe = rfe.fit(x_train, y_train)
-    print(rfe.support_)
-    print(rfe.ranking_)
-    return x_test, y_test
-
-
 def trim_list_whitespace(list_to_trim):
     """Removes all whitespace from the elements of a list."""
     return_list = []
@@ -715,15 +504,6 @@ def view_value_counts(dataframe):
     return
 
 
-def get_percentage_missing(dataframe, column):
-    """ 
-    Caluculate the percentage of null values in a dataframe column.
-    """
-    num = dataframe[column].isnull().sum()
-    den = len(dataframe)
-    return str(round(num/den, 4) * 100) + "%"
-
-
 def pdf_shape(dataframe):
     """
     Pretty print the shape of a dataframe.
@@ -732,12 +512,3 @@ def pdf_shape(dataframe):
     print("Rows: " + str(rows))
     print("Cols: " + str(cols))
     return
-
-
-if __name__ == "__main__":
-    if "ubuntu" in str(os.getcwd()):
-        pass
-    else:
-        import win32api
-        put_quotations_around_columns()
-    print_random_new_lines(5)
