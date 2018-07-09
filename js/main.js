@@ -1,126 +1,114 @@
-/*
+/**
 This is a list of personal functions I've created that have helped me in my work.
 */
-function log(message){
+function log(message) {
 	/*Helper function to log to the console messages for debugging.*/
 	console.log(message);
 }
 
-
-function print_multiplied_text() {
+function printTextMultiplied() {
 	/*This function will multiply the text you input into the input box.*/
-	var in_text = document.forms['myForm']['input_text'].value;
+	var inText = document.forms['myForm']['input_text'].value;
 	var count = document.forms['myForm']['multiply_count'].value;
-	var index_choice = document.querySelector('input[name="choice"]:checked').value;
+	var indexChoice = document.querySelector('input[name="choice"]:checked').value;
 	var out = ""
-	
-	if(index_choice == "no"){
-		for (i=0; i<count; i++){
-			out += in_text;
+	if (indexChoice == "no") {
+		for (i = 0; i < count; i++) {
+			out += inText;
 			out += "\n";
 		}
-	}else{
-		for (i=0; i<count; i++){
-			out += in_text;
+	} else {
+		for (i = 0; i < count; i++) {
+			out += inText;
 			out += " ";
 			out += i;
 			out += "\n";
 		}
 	}
-	
-
 	textbox = document.getElementById('output');
 	textbox.value = out;
 }
 
-
-function remove_new_lines() {
+function removeNewLines() {
 	/*This function will remove all new lines from the given input box.*/
 	var regex = new RegExp('\n', 'g');
-	var index_choice = document.querySelector('input[name="choice"]:checked').value;
-	textarea_input = document.getElementById("input").value;
-	
-	if(index_choice == "none"){
-		textarea_output = textarea_input.replace(regex, "");		
-	} else if (index_choice == "tab"){
-		textarea_output = textarea_input.replace(regex, "\t");
+	var indexChoice = document.querySelector('input[name="choice"]:checked').value;
+	textareaInput = document.getElementById("input").value;
+	if (indexChoice == "none") {
+		textareaOutput = textareaInput.replace(regex, "");
+	} else if (indexChoice == "tab") {
+		textareaOutput = textareaInput.replace(regex, "\t");
 	} else {
-		textarea_output = textarea_input.replace(regex, ",");	
+		textareaOutput = textareaInput.replace(regex, ",");
 	}
-
-	textarea_out = document.getElementById('output');
-	textarea_out.value = textarea_output;
+	textareaOut = document.getElementById('output');
+	textareaOut.value = textareaOutput;
 }
 
-
-function convert_list_to_rows() {
+function convertListsToRows() {
 	/*Input a comma separated list and convert that to new line separated rows.*/
-	textarea_input = document.getElementById("input").value;
+	textareaInput = document.getElementById("input").value;
 	var regex = new RegExp(',', 'g');
-	textarea_output = textarea_input.replace(regex, '\n')
-	textarea_out = document.getElementById('output');
-	textarea_out.value = textarea_output;	
+	textareaOutput = textareaInput.replace(regex, '\n')
+	textareaOut = document.getElementById('output');
+	textareaOut.value = textareaOutput;
 }
 
-
-function put_quotations_around_text() {
+function putQuotationsAroundText() {
 	/*Given any amount of comma separated or plain rows, you can put quotations around them.*/
-	textarea_input = document.getElementById("input").value;
-	if(textarea_input.includes(",")){
-		var regex = new RegExp(',\n', 'g');		
+	textareaInput = document.getElementById("input").value;
+	if (textareaInput.includes(",")) {
+		var regex = new RegExp(',\n', 'g');
 	} else {
 		var regex = new RegExp('\n', 'g');
 	}
-
-	textarea_output = textarea_input.split(regex);
-	var array_length = textarea_output.length;
-	var new_textarea_output = []
-	for(i=0; i < array_length; i++){
-		curr_element = "\n\"";
-		curr_element += textarea_output[i];
-		curr_element += "\"";
-		new_textarea_output.push(curr_element)
+	textareaOutput = textareaInput.split(regex);
+	var arrayLength = textareaOutput.length;
+	var newTextAreaOutput = []
+	for (i = 0; i < arrayLength; i++) {
+		currElement = "\n\"";
+		currElement += textareaOutput[i];
+		currElement += "\"";
+		newTextAreaOutput.push(currElement)
 	}
-	new_textarea_output[0] = new_textarea_output[0].replace("\n","")
-	textarea_out = document.getElementById('output');
-	textarea_out.value = new_textarea_output;
+	newTextAreaOutput[0] = newTextAreaOutput[0].replace("\n", "")
+	textareaOut = document.getElementById('output');
+	textareaOut.value = newTextAreaOutput;
 }
 
-
-function python_def_extraction() {
+function extractPythonDefinitions() {
 	/*Insert your python code and this program will print out all the rows that contain "def".*/
-	textarea_input = document.getElementById("input").value;
+	textareaInput = document.getElementById("input").value;
 	var regex = new RegExp('\n', 'g');
-	textarea_output = textarea_input.split(regex);
-	var array_length = textarea_output.length;
-	var new_textarea_output = [];
-	for(i=0; i < array_length; i++){
-		curr_element = ""
-		if (textarea_output[i].includes("def")){
-			curr_element += textarea_output[i];
-			curr_element += "\n";
-			new_textarea_output.push(curr_element);
+	textareaOutput = textareaInput.split(regex);
+	var arrayLength = textareaOutput.length;
+	var newTextAreaOutput = [];
+	for (i = 0; i < arrayLength; i++) {
+		currElement = ""
+		if (textareaOutput[i].includes("def")) {
+			currElement += textareaOutput[i];
+			currElement += "\n";
+			newTextAreaOutput.push(currElement);
 		}
 	}
-	textarea_out = document.getElementById('output');
-	textarea_out.value = new_textarea_output.join("")
+	textareaOut = document.getElementById('output');
+	textareaOut.value = newTextAreaOutput.join("")
 }
 
-
-function common_value_printer() {
+function printCommonValues() {
 	/*Checks two comma separated list for any common terms.Then prints the output to the text area.*/
 	set1 = document.getElementById("set1").value;
 	set2 = document.getElementById("set2").value;
-	set_1 = set1.split(",");
-	set_2 = set2.split(",");
-	common_set = [];
-	for(i=0; i<set_1.length; i++){
-		for(j=0; j<set_2.length; j++){
-			if(set_1[i] == set_2[j]){
-				common_set.push(set_1[i]);
+	setOneSplit = set1.split(",");
+	setTwoSplit = set2.split(",");
+	commonSet = [];
+	for (i = 0; i < setOneSplit.length; i++) {
+		for (j = 0; j < setTwoSplit.length; j++) {
+			if (setOneSplit[i] == setTwoSplit[j]) {
+				commonSet.push(setOneSplit[i]);
 			}
 		}
 	}
-	textarea_out = document.getElementById('output');
-	textarea_out.value = common_set;
+	textareaOut = document.getElementById('output');
+	textareaOut.value = commonSet;
 }
