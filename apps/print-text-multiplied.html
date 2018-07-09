@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Print Multiplied Text
+		</title>
+		<script type='text/javascript' src='../main.js'></script>
+	</head>
+	<body>
+		<h1><a href="https://github.com/paulone">My Github</a></h1>
+		<hr>
+		<p>
+			This program takes whatever input you want to give it, then it will multiply by how many times you want.
+			The index checker is whether or not you want a index number after it. (e.g. 0, 1, 2, 3, etc)
+		</p>
+		<form name="myForm">
+			Do you want an index?
+			<input type="radio" id="yes" name="choice" checked="checked" value="yes">
+			<label for="contactChoice1">Yes</label>
+
+			<input type="radio" id="no" name="choice" value="no">
+			<label for="contactChoice2">No</label>
+			</br></br>
+			Text:</br>
+			<input type="text" name="input_text"></br></br>
+			Multiply Count:</br>
+			<input type="number" name="multiply_count"></br></br>
+		</form>
+		<button onclick="print_multiplied_text()">Multiply!</button>
+		</br></br>
+		Output:</br> 
+		<div>
+			<textarea id="output" col="50" rows="25"></textarea>
+		</div>
+
+	</body>
+</html>
